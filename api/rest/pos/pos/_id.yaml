@@ -1,0 +1,333 @@
+get:
+  tags:
+    - POS
+  summary: Get pos
+  description: Get pos
+  produces:
+    - application/json
+    - application/xml
+  parameters:
+    - name: id
+      in: path
+      description: ID of pos
+      required: true
+      type: integer
+      format: int64
+      default: 1
+  responses:
+    '200':
+      description: Create pos response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int64
+                default: 2
+              serviceName:
+                type: string
+                example: serviceName
+              serviceType:
+                type: string
+                example: serviceType
+              serviceDetail:
+                type: string
+                example: serviceDetail
+              shopsId:
+                type: integer
+                example: 32
+              centerId:
+                type: integer
+                example: 32
+              serviceTemplateId:
+                type: integer
+                example: 15
+              defaultRoutineId:
+                type: integer
+                example: 13
+              defaultAvatarId:
+                type: integer
+                example: 23
+              routineIds:
+                type: integer
+                example:
+                  - 43
+                  - 52
+                  - 34
+              avatarIds:
+                type: integer
+                example:
+                  - 10
+                  - 56
+                  - 22
+                  - 45
+              createdAt:
+                type: string
+                default: '2012-10-15T21:26:17Z'
+              updatedAt:
+                type: string
+                default: '2012-10-15T21:26:17Z'
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: id is not exist
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Account not authenticated  
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You don’t have permission to access on this server
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Database not responding
+put:
+  tags:
+    - POS
+  summary: Update pos
+  description: Update pos
+  produces:
+    - application/json
+    - application/xml
+  parameters:
+    - name: id
+      in: path
+      description: ID of pos
+      required: true
+      type: integer
+      format: int64
+      default: 1
+    - name: pos request
+      in: body
+      required: true
+      schema:
+        type: object
+        properties:
+          serviceName:
+            type: string
+            example: serviceName
+          serviceType:
+            type: string
+            example: serviceType
+          serviceDetail:
+            type: string
+            example: serviceDetail
+          shopsId:
+            type: integer
+            example: 32
+          centerId:
+            type: integer
+            example: 32
+          serviceTemplateId:
+            type: integer
+            example: 15
+          defaultRoutineId:
+            type: integer
+            example: 13
+          defaultAvatarId:
+            type: integer
+            example: 23
+          routineIds:
+            type: integer
+            example:
+              - 43
+              - 52
+              - 34
+          avatarIds:
+            type: integer
+            example:
+              - 10
+              - 56
+              - 22
+              - 45
+  responses:
+    '200':
+      description: pos response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int64
+                default: 2
+              serviceName:
+                type: string
+                example: ''
+              serviceType:
+                type: string
+                example: ''
+              serviceDetail:
+                type: string
+                example: ''
+              shopsId:
+                type: integer
+                example: 32
+              centerId:
+                type: integer
+                example: 32
+              serviceTemplateId:
+                type: integer
+                example: 15
+              defaultRoutineId:
+                type: integer
+                example: 13
+              defaultAvatarId:
+                type: integer
+                example: 23
+              routineIds:
+                type: integer
+                example:
+                  - 43
+                  - 52
+                  - 34
+              avatarIds:
+                type: integer
+                example:
+                  - 10
+                  - 56
+                  - 22
+                  - 45
+              createdAt:
+                type: string
+                default: '2012-10-15T21:26:17Z'
+              updatedAt:
+                type: string
+                default: '2012-10-15T21:26:17Z'
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: id is not exist
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Account not authenticated  
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You don’t have permission to access on this server
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Database not responding
+delete:
+  summary: Delete pos
+  tags:
+    - POS
+  description: Delete pos
+  produces:
+    - application/json
+    - application/xml
+  parameters:
+    - name: id
+      in: path
+      description: ID pos
+      required: true
+      type: integer
+      format: int64
+      default: 1
+  responses:
+    '200':
+      description: Delete pos successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              rowAffected:
+                type: integer
+                format: int64
+                default: 1
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: id is not exist
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Account not authenticated  
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You don’t have permission to access on this server
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Database not responding

@@ -1,0 +1,177 @@
+post:
+  tags:
+    - Account Role
+  summary: Create account role
+  description: Create account role
+  produces:
+    - application/json
+    - application/xml
+  parameters:
+    - name: accountRole
+      in: body
+      required: true
+      schema:
+        type: object
+        properties:
+          name:
+            type: string
+            default: Admin
+          permissionIds:
+            type: string
+            default:
+              - 1
+              - 3
+              - 9
+  responses:
+    '200':
+      description: Create account role successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                default: 1
+              name:
+                type: string
+                default: Admin
+              permissionIds:
+                type: string
+                default:
+                  - 1
+                  - 3
+                  - 9
+              createdAt:
+                type: string
+                default: '2012-10-15T21:26:17Z'
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: permissionIds does not exist
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Account not authenticated
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You don’t have permission to access on this server
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Database not responding
+get:
+  tags:
+    - Account Role
+  summary: Get list account role
+  description: Get list account role
+  produces:
+    - application/json
+    - application/xml
+  parameters:
+    - name: permission
+      in: body
+      required: true
+      schema:
+        type: object
+        properties:
+          page:
+            type: integer
+            format: int64
+            example: 1
+            description: Pages to search for
+          perPage:
+            type: integer
+            format: int64
+            example: 20
+            description: Number of item per page
+  responses:
+    '200':
+      description: Get list account role successfully
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  default: 1
+                name:
+                  type: string
+                  default: Admin
+                permissionIds:
+                  type: string
+                  default:
+                    - 1
+                    - 3
+                    - 9
+                createdAt:
+                  type: string
+                  default: '2012-10-15T21:26:17Z'
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: permissionIds does not exist
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Account not authenticated
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You don’t have permission to access on this server
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Database not responding

@@ -1,0 +1,228 @@
+post:
+  tags:
+    - Talk Session
+  summary: Create talk session
+  description: Create talk session
+  produces:
+    - application/json
+    - application/xml
+  parameters:
+    - name: Create talk session request
+      in: body
+      schema:
+        type: object
+        properties:
+          storageLink:
+            type: string
+            format: string
+          usedHotkey:
+            type: string
+            format: string
+          sessionStatus:
+            type: string
+            example: string
+          customerRecord:
+            type: string
+            default: string
+          avatarId:
+            type: integer
+            format: int64
+            example: 2
+          ipCameraId:
+            type: integer
+            format: int64
+            example: 5
+          conversation:
+            type: string
+            example: conversation
+          posId:
+            type: integer
+            format: int64
+            example: 5
+  responses:
+    '200':
+      description: Create notes response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int64
+                default: 2
+              startTime:
+                type: string
+                format: string
+              storageLink:
+                type: string
+                format: string
+              usedHotkey:
+                type: string
+                format: string
+              sessionStatus:
+                type: string
+                example: string
+              customerRecord:
+                type: string
+                default: string
+              avatarId:
+                type: integer
+                format: int64
+                example: 2
+              ipCameraId:
+                type: integer
+                format: int64
+                example: 5
+              conversation:
+                type: string
+                example: conversation
+              posId:
+                type: integer
+                format: int64
+                example: 5
+              createdAt:
+                type: string
+                default: '2012-10-15T21:26:17Z'
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: StorageLink is must be string
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Account not authenticated  
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You don’t have permission to access on this server
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Database not responding
+get:
+  tags:
+    - Talk Session
+  summary: Get list talk session
+  description: Get list talk session
+  produces:
+    - application/json
+    - application/xml
+  parameters:
+    - name: talk session list request
+      in: body
+      required: true
+      schema:
+        type: object
+        properties:
+          page:
+            type: integer
+            format: int64
+            example: 1
+            description: Pages to search for
+          perPage:
+            type: integer
+            format: int64
+            example: 20
+            description: Number of item per page
+  responses:
+    '200':
+      description: Talk session list output
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  format: int64
+                  default: 2
+                startTime:
+                  type: string
+                  format: string
+                storageLink:
+                  type: string
+                  format: string
+                usedHotkey:
+                  type: string
+                  format: string
+                sessionStatus:
+                  type: string
+                  example: string
+                customerRecord:
+                  type: string
+                  default: string
+                avatarId:
+                  type: integer
+                  format: int64
+                  example: 2
+                ipCameraId:
+                  type: integer
+                  format: int64
+                  example: 5
+                conversation:
+                  type: string
+                  example: conversation
+                posId:
+                  type: integer
+                  format: int64
+                  example: 5
+                createdAt:
+                  type: string
+                  default: '2012-10-15T21:26:17Z'
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Account not authenticated  
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You don’t have permission to access on this server
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Database not responding

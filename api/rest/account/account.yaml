@@ -1,0 +1,114 @@
+post:
+  tags:
+    - Account
+  description: Create account
+  summary: Create account
+  parameters:
+    - name: create account request
+      in: body
+      schema:
+        type: object
+        properties:
+          roleId:
+            type: integer
+            format: int64
+            example: 3
+          serviceTemplateId:
+            type: integer
+            format: int64
+            example: 10
+          centerId:
+            type: integer
+            format: int32
+            example: 10
+          username:
+            type: string
+            format: string
+          password:
+            type: string
+            format: password
+          gender:
+            type: integer
+            default: 0
+          email:
+            type: string
+            format: email
+  responses:
+    '200':
+      description: Create account successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int64
+                example: 1
+              roleId:
+                type: integer
+                format: int64
+                example: 3
+              serviceTemplateId:
+                type: integer
+                format: int64
+                example: 10
+              centerId:
+                type: integer
+                format: int32
+                example: 10
+              username:
+                type: string
+                format: string
+              password:
+                type: string
+                format: password
+              gender:
+                type: integer
+                default: 0
+              email:
+                type: string
+                format: email
+              createdAt:
+                type: string
+                default: '2012-10-15T21:26:17Z'
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: talkSessionHistoryId does not exist
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Account not authenticated
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You don’t have permission to access on this server
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Database not responding

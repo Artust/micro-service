@@ -1,0 +1,231 @@
+get:
+  tags:
+    - Account Role
+  summary: Get account role
+  description: Get account role
+  produces:
+    - application/json
+    - application/xml
+  parameters:
+    - name: id
+      in: path
+      description: ID of accountRole
+      required: true
+      type: integer
+      format: int64
+      default: 1
+  responses:
+    '200':
+      description: Get account role successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int64
+                example: 2
+              name:
+                type: string
+                format: string
+              createdAt:
+                type: string
+                format: date-time
+              updatedAt:
+                type: string
+                format: date-time
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: id does not exist
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Account not authenticated
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You don’t have permission to access on this server
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Database not responding
+put:
+  tags:
+    - Account Role
+  summary: Update account role
+  description: Update account role
+  produces:
+    - application/json
+    - application/xml
+  parameters:
+    - name: id
+      in: path
+      description: ID of permission
+      required: true
+      type: integer
+      format: int64
+      default: 2
+    - name: permission
+      in: body
+      required: true
+      schema:
+        type: object
+        properties:
+          name:
+            type: string
+            format: string
+  responses:
+    '200':
+      description: Update account role successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int64
+                example: 2
+              name:
+                type: string
+                format: string
+              createdAt:
+                type: string
+                format: date-time
+              updatedAt:
+                type: string
+                format: date-time
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: id does not exist
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Account not authenticated
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You don’t have permission to access on this server
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Database not responding
+delete:
+  tags:
+    - Account Role
+  summary: Delete account role
+  description: Delete account role
+  produces:
+    - application/json
+    - application/xml
+  parameters:
+    - name: id
+      in: path
+      description: ID of accountRole
+      required: true
+      type: integer
+      format: int64
+      default: 1
+  responses:
+    '200':
+      description: Delete account role successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              rowAffected:
+                type: integer
+                format: int64
+                example: 1
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: id does not exist
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Account not authenticated
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You don’t have permission to access on this server
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Database not responding

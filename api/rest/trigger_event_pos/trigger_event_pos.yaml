@@ -1,0 +1,74 @@
+post:
+  tags:
+    - Trigger Event
+  summary: Trigger Event Pos Side
+  description: Trigger Event Pos Side
+  produces:
+    - application/json
+    - application/xml
+  parameters:
+    - name: Trigger Event Pos Side request
+      in: body
+      required: true
+      schema:
+        type: object
+        properties:
+          event:
+            type: string
+          payload:
+            type: object
+            properties:
+              talkSessionId:
+                type: integer
+                example: 1
+  responses:
+    '200':
+      description: ipcamera create response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                default: successful
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Forbidden Serial Number
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Account not authenticated
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You don’t have permission to access on this server
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Database not responding

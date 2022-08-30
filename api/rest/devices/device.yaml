@@ -1,0 +1,294 @@
+post:
+  tags:
+    - Device
+  summary: Create device
+  description: Create device
+  produces:
+    - application/json
+    - application/xml
+  parameters:
+    - name: device create request
+      in: body
+      required: true
+      schema:
+        type: object
+        properties:
+          maker:
+            type: string
+            example: maker
+            description: Maker of device
+          serialNumber:
+            type: string
+            example: serialNumber
+            description: SerialNumber of device
+          deviceType:
+            type: string
+            example: deviceType
+            description: Type of device
+          usePurpose:
+            type: string
+            example: usePurpose
+            description: Purpose of using the device
+          owner:
+            type: integer
+            format: int64
+            example: 2
+            description: Owner of device
+          users:
+            type: integer
+            format: int64
+            example:
+              - 2
+              - 5
+              - 6
+            description: User of device
+          onsiteType:
+            type: string
+            example: onsiteType
+            description: onsiteType of device
+          accountId:
+            type: integer
+            format: int64
+            example: 5
+            description: Account Id of device
+          posId:
+            type: integer
+            format: int64
+            example: 2
+            description: Id of pos
+          centerId:
+            type: integer
+            format: int64
+            example: 6
+            description: Id of center
+  responses:
+    '200':
+      description: corporation create response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int64
+                default: 2
+              maker:
+                type: string
+                example: maker
+              serialNumber:
+                type: string
+                example: serialNumber
+              deviceType:
+                type: string
+                example: deviceType
+              usePurpose:
+                type: string
+                example: usePurpose
+              owner:
+                type: integer
+                format: int64
+                example: 2
+              users:
+                type: integer
+                format: int64
+                example:
+                  - 2
+                  - 5
+                  - 6
+              onsiteType:
+                type: string
+                example: onsiteType
+              accountId:
+                type: integer
+                format: int64
+                example: 5
+              posId:
+                type: integer
+                format: int64
+                example: 2
+              centerId:
+                type: integer
+                format: int64
+                example: 6
+              createdAt:
+                type: string
+                default: '2012-10-15T21:26:17Z'
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Address must be string
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Account not authenticated
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You don’t have permission to access on this server
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Database not responding
+get:
+  tags:
+    - Device
+  summary: Get list device
+  description: Get list device
+  produces:
+    - application/json
+    - application/xml
+  parameters:
+    - name: list device request
+      in: body
+      required: true
+      schema:
+        type: object
+        properties:
+          accountId:
+            type: integer
+            format: int64
+            example: 5
+            description: Account Id of device
+          posId:
+            type: integer
+            format: int64
+            example: 2
+            description: Id of pos
+          centerId:
+            type: integer
+            format: int64
+            example: 6
+            description: Id of center
+          page:
+            type: integer
+            format: int64
+            example: 1
+            description: Pages to search for
+          perPage:
+            type: integer
+            format: int64
+            example: 20
+            description: Number of item per page
+  responses:
+    '200':
+      description: corporation create response
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  format: int64
+                  default: 2
+                maker:
+                  type: string
+                  example: maker
+                serialNumber:
+                  type: string
+                  example: serialNumber
+                deviceType:
+                  type: string
+                  example: deviceType
+                usePurpose:
+                  type: string
+                  example: usePurpose
+                owner:
+                  type: integer
+                  format: int64
+                  example: 2
+                users:
+                  type: integer
+                  format: int64
+                  example:
+                    - 2
+                    - 5
+                    - 6
+                onsiteType:
+                  type: string
+                  example: onsiteType
+                accountId:
+                  type: integer
+                  format: int64
+                  example: 5
+                posId:
+                  type: integer
+                  format: int64
+                  example: 2
+                centerId:
+                  type: integer
+                  format: int64
+                  example: 6
+                createdAt:
+                  type: string
+                  default: '2012-10-15T21:26:17Z'
+                updatedAt:
+                  type: string
+                  default: '2012-10-15T21:26:17Z'
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Address must be string
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Account not authenticated
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You don’t have permission to access on this server
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Database not responding

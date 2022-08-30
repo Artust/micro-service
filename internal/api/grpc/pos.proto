@@ -1,0 +1,458 @@
+syntax = "proto3";
+
+option go_package = "/protos";
+
+package pos;
+
+service POS {
+  rpc CreateRoutine (CreateRoutineRequest) returns (CreateRoutineResponse) {}
+  rpc GetRoutine (GetByIdRequest) returns (CreateRoutineResponse) {}
+  rpc GetListRoutine (GetListRoutineRequest) returns (GetListRoutineResponse) {}
+  rpc UpdateRoutine (UpdateRoutineRequest) returns (CreateRoutineResponse) {}
+  rpc DeleteRoutine (DeleteRoutineRequest) returns (DeleteResponse) {}
+  rpc GetListRoutineByCategory (GetListRoutineByCategoryRequest) returns (GetListRoutineByCategoryResponse){}
+  rpc CreateManyRoutine (CreateManyRoutineRequest) returns (CreateManyRoutineResponse){}
+
+  rpc TriggerEventOperatorSide (TriggerEventOperatorSideRequest) returns (TriggerEventOperatorSideResponse) {}
+
+  rpc CreateRoutineCategory (CreateRoutineCategoryRequest) returns (CreateRoutineCategoryResponse) {}
+  rpc GetListRoutineCategory (GetListRoutineCategoryRequest) returns (GetListRoutineCategoryResponse){}
+  rpc GetRoutineCategory (GetByIdRequest) returns (CreateRoutineCategoryResponse){}
+  rpc UpdateRoutineCategory (UpdateRoutineCategoryRequest) returns (CreateRoutineCategoryResponse) {}
+  rpc DeleteRoutineCategory (DeleteByIdRequest) returns (DeleteResponse) {}
+
+  rpc CreatePos (CreatePosRequest) returns (CreatePosResponse) {}
+  rpc GetPos (GetByIdRequest) returns (CreatePosResponse) {}
+  rpc GetListPos (GetListPosRequest) returns (GetListPosResponse) {}
+  rpc UpdatePos (UpdatePosRequest) returns (CreatePosResponse) {}
+  rpc DeletePos (DeleteByIdRequest) returns (DeleteResponse) {}
+
+  rpc CreateMonitor (CreateMonitorRequest) returns (CreateMonitorResponse) {}
+  rpc GetMonitor (GetByIdRequest) returns (CreateMonitorResponse) {}
+  rpc GetListMonitor (GetListMonitorRequest) returns (GetListMonitorResponse) {}
+  rpc UpdateMonitor (UpdateMonitorRequest) returns (CreateMonitorResponse) {}
+  rpc DeleteMonitor (DeleteByIdRequest) returns (DeleteResponse) {}
+
+  rpc CreateIpCamera (CreateIpCameraRequest) returns (CreateIpCameraResponse) {}
+  rpc GetIpCamera (GetByIdRequest) returns (CreateIpCameraResponse) {}
+  rpc UpdateIpCamera (UpdateIpCameraRequest) returns (CreateIpCameraResponse) {}
+  rpc DeleteIpCamera (DeleteByIdRequest) returns (DeleteResponse) {}
+  rpc GetListIpCamera (GetListIpCameraRequest) returns (GetListIpCameraResponse) {}
+}
+
+message Empty {}
+
+message GetByIdRequest{
+  int64 id = 1;   
+}
+
+message DeleteByIdRequest{
+  int64 id = 1;   
+}
+
+message DeleteResponse{
+  int64 rowsAffected = 1;
+}
+
+message TmpGetIPCameraResponse{
+  string shinobiMonitorUrl = 1;
+}
+
+message ListRoutineSortedByCategory{
+  CreateRoutineCategoryResponse category = 1;
+  repeated CreateRoutineResponse routines = 2;
+}
+
+message GetListRoutineByCategoryRequest{
+  int64 posId = 1;
+  int64 page = 2;
+  int64 perPage = 3;
+  repeated int64 categoryIds = 4;
+  repeated int64 ids = 5;
+  string endDate = 6;
+  int64 between = 7;
+}
+
+message GetListRoutineByCategoryResponse{
+  repeated ListRoutineSortedByCategory getListRoutineSortedByCategoryResponse = 1;
+}
+
+message CreatePosRequest{
+  string name = 1;
+  string serviceName = 2;
+  string serviceCategory = 3;
+  string serviceDetail = 4;
+  int64 shopId = 5;
+  int64 centerId = 6;
+  int64 serviceTemplateId = 7;
+  repeated int64 maleRoutineIds = 8;
+  repeated int64 defaultMaleRoutineIds = 9;
+  repeated int64 femaleRoutineIds = 10;
+  repeated int64 defaultFemaleRoutineIds = 11;
+  int64 defaultAvatarId = 12;
+  int64 createdBy = 14;
+  bool active = 15;
+  bool useServiceTemplate = 16;
+  repeated string backgrounds = 17;
+  string defaultBackground = 18;
+}
+
+message GetListPosRequest{
+  int64 shopId = 1;
+  int64 centerId = 2;
+  int64 page = 3;
+  int64 perPage = 4;
+}
+
+message GetListPosResponse{
+  repeated CreatePosResponse GetListPosResponse = 1;
+}
+
+message CreatePosResponse{
+  int64 id = 1;
+  string name = 2;
+  string serviceName = 3;
+  string serviceCategory = 4;
+  string serviceDetail = 5;
+  int64 shopId = 6;
+  int64 centerId = 7;
+  int64 serviceTemplateId = 8;
+  repeated int64 maleRoutineIds = 9;
+  repeated int64 defaultMaleRoutineIds = 10;
+  repeated int64 femaleRoutineIds = 11;
+  repeated int64 defaultFemaleRoutineIds = 12;
+  int64 defaultAvatarId = 13;
+  int64 createdBy = 15;
+  string createdAt = 16;
+  string updatedAt = 17;
+  bool active = 18;
+  bool useServiceTemplate = 19;
+  repeated string backgrounds = 20;
+  string defaultBackground = 21;
+}
+
+message UpdatePosRequest{
+  int64 id = 1;
+  string name = 2;
+  string serviceName = 3;
+  string serviceCategory = 4;
+  string serviceDetail = 5;
+  int64 shopId = 6;
+  int64 centerId = 7;
+  int64 serviceTemplateId = 8;
+  repeated int64 maleRoutineIds = 9;
+  repeated int64 defaultMaleRoutineIds = 10;
+  repeated int64 femaleRoutineIds = 11;
+  repeated int64 defaultFemaleRoutineIds = 12;
+  int64 defaultAvatarId = 13;
+  int64 createdBy = 15;
+  bool active = 16;
+  bool useServiceTemplate = 17;
+  repeated string backgrounds = 18;
+  string defaultBackground = 19;
+}
+
+message TriggerEventOperatorSideRequest{
+  string event = 1;
+  string payload = 2;
+}
+
+message TriggerEventOperatorSideResponse{
+  string event = 1;
+  string payload = 2;
+}
+
+message CreateManyRoutineRequest{
+  repeated CreateRoutineRequest routines = 1;
+}
+
+message CreateManyRoutineResponse{
+  repeated CreateRoutineResponse routines = 1;
+}
+
+message CreateRoutineRequest{
+  string name = 1;
+  string detail = 2; 
+  string animationFile = 3;
+  string soundFile = 4;
+  string imageFile = 5;
+  string startDate = 6;
+  string endDate = 7;
+  int64 categoryId = 8;
+  int64 posId = 9;
+  int64 serviceTemplateId = 10;
+  int64 serviceTemplateRoutineId = 11;
+  int64 gender = 12;
+}
+
+message CreateRoutineResponse{
+  int64 id = 1;   
+  string name = 2;
+  string detail = 3; 
+  string animationFile = 4;
+  string soundFile = 5;
+  string imageFile = 6;
+  int64 posId = 7;
+  int64 serviceTemplateId = 8;
+  int64 categoryId = 9;
+  string startDate = 10;
+  string endDate = 11;
+  int64 serviceTemplateRoutineId = 12;
+  int64 gender = 13;
+  string createdAt = 14; 
+  string updatedAt = 15;
+  
+}
+
+message GetListRoutineRequest {
+  int64 posId = 1;
+  int64 categoryId = 2;
+  int64 page = 3;
+  int64 perPage = 4;
+  int64 gender = 5;
+  repeated int64 ids = 6;
+}
+
+message GetListRoutineResponse {
+  repeated CreateRoutineResponse GetListRoutineResponse = 1;
+}
+
+message UpdateRoutineRequest {
+  int64 id = 1;   
+  string name = 2;
+  string detail = 3; 
+  string animationFile = 4;
+  string soundFile = 5;
+  string imageFile = 6;
+  int64 posId = 7;
+  int64 serviceTemplateId = 8;
+  int64 categoryId = 9;
+  string startDate = 10;
+  string endDate = 11;
+  int64 serviceTemplateRoutineId = 12;
+  int64 gender = 13;
+}
+
+message DeleteRoutineRequest{
+  int64 id = 1;
+  int64 posId = 2;
+}
+
+message CreateCustomerMonitorRequest{
+  repeated int64 posId= 1;
+  string maker = 2;
+  string serialNumber = 3; 
+  string resolutionWidth = 4;
+  string resolutionHeight = 5;
+  string rotation = 6;
+  string monitorStatus = 7;
+  int64 avatarId = 12;
+}
+
+message CreateCustomerMonitorResponse{
+  int64 id = 1;
+}
+
+message GetCustomerMonitorRequest{
+  int64 id = 1;
+  int64 POSid = 2;
+}
+
+message GetCustomerMonitorResponse{
+  int64 id = 1;
+  int64 posId= 2;
+  string maker = 3;
+  string serialNumber = 4; 
+  string resolutionWidth = 5;
+  string resolutionHeight = 6;
+  string rotation = 7;
+  string monitorStatus = 8;
+  string createdAt = 9;
+  string updatedAt = 10;
+  int64 avatarId = 12;
+}
+
+message UpdateCustomerMonitorRequest{
+  int64 id = 1;
+  int64 posId= 2;
+  string maker = 3;
+  string serialNumber = 4; 
+  string resolutionWidth = 5;
+  string resolutionHeight = 6;
+  string rotation = 7;
+  string monitorStatus = 8;
+  int64 avatarId = 9;
+}
+
+message UpdateCustomerMonitorResponse{
+  int64 id = 1;
+  int64 posId= 2;
+  string maker = 3;
+  string serialNumber = 4; 
+  string resolutionWidth = 5;
+  string resolutionHeight = 6;
+  string rotation = 7;
+  string monitorStatus = 8;
+  string createdAt = 9;
+  string updatedAt = 10;
+  int64 avatarId = 12;
+}
+
+message CreateRoutineCategoryRequest{
+  string name =1;
+  string createdAt = 2;
+  string updatedAt = 3;
+}
+
+message CreateRoutineCategoryResponse{
+  int64 id = 1;
+  string name = 2;
+  string createdAt = 3;
+  string updatedAt = 4;
+}
+
+message GetListRoutineCategoryRequest {
+  int64 page = 1;
+  int64 perPage = 2;
+}
+
+message GetListRoutineCategoryResponse{
+  repeated CreateRoutineCategoryResponse GetListRoutineCategoryResponse = 1;
+}
+
+message UpdateRoutineCategoryRequest{
+  int64 id = 1;
+  string name = 2;
+}
+
+message CreateMonitorRequest {
+  string maker = 1;
+  string serialNumber = 2;
+  string monitorStatus = 3;
+  int64 resolutionWidth = 4;
+  int64 resolutionHeight = 5;
+  bool horizontalRotation = 6; 
+  int64 posId = 7;
+}
+
+message CreateMonitorResponse{
+  int64 id = 1;
+  string maker = 2;
+  string serialNumber = 3;
+  string monitorStatus = 4;
+  int64 resolutionWidth = 5;
+  int64 resolutionHeight = 6;
+  bool horizontalRotation = 7;
+  int64 posId = 8;
+  string createdAt = 9;
+  string updatedAt = 10;
+}
+
+message GetListMonitorRequest {
+  int64 page = 1;
+  int64 perPage = 2;
+  int64 posId = 3;
+}
+
+message GetListMonitorResponse{
+  repeated CreateMonitorResponse GetListMonitorResponse = 1;
+}
+
+message UpdateMonitorRequest{
+  int64 id = 1;
+  string maker = 2;
+  string serialNumber = 3;
+  string monitorStatus = 4;
+  int64 resolutionWidth = 5;
+  int64 resolutionHeight = 6;
+  bool horizontalRotation = 7;
+  int64 posId = 8;
+}
+
+message CreateDeviceRequest {
+  string maker = 1;
+  string serialNumber = 2;
+  string deviceType = 3;
+  string usePurpose = 4;
+  int64 owner = 5;
+  string onsiteType = 6;
+  int64 accountId = 7;
+  int64 posId = 8;
+  int64 centerId = 9;
+}
+
+message CreateDeviceResponse {
+  int64 id = 1;
+  string maker = 2;
+  string serialNumber = 3;
+  string deviceType = 4;
+  string usePurpose = 5;
+  int64 owner = 6;
+  string onsiteType = 7;
+  int64 accountId = 8;
+  int64 posId = 9;
+  int64 centerId = 10;
+  string createdAt = 11;
+  string updatedAt = 12;
+}
+
+message UpdateDeviceRequest {
+  int64 id = 1;
+  string maker = 2;
+  string serialNumber = 3;
+  string deviceType = 4;
+  string usePurpose = 5;
+  int64 owner = 6;
+  string onsiteType = 7;
+  int64 accountId = 8;
+  int64 posId = 9;
+  int64 centerId = 10;
+}
+
+message GetListDeviceRequest{
+  int64 page = 1;
+  int64 perPage = 2;
+  int64 accountId = 3;
+  int64 posId = 4;
+  int64 centerId = 5;
+}
+
+message GetListDeviceResponse{
+  repeated CreateDeviceResponse GetListDeviceResponse = 1;
+}
+
+message CreateIpCameraRequest {
+  bool isPrimaryCamera = 1;
+  string publicURI = 2;
+  string privateURI = 3;
+  int64 deviceId = 4;
+}
+
+message CreateIpCameraResponse {
+  int64 id = 1;
+  bool isPrimaryCamera = 2;
+  string publicURI = 3;
+  string privateURI = 4;
+  int64 deviceId = 5;
+  string createdAt = 6;
+  string updatedAt = 7;
+}
+
+message GetListIpCameraRequest {
+  int64 page = 1;
+  int64 perPage = 2;
+  int64 posId = 3;
+  repeated int64 deviceIds = 4;
+}
+
+message GetListIpCameraResponse {
+  repeated CreateIpCameraResponse GetListIpCameraResponse = 1;
+}
+
+message UpdateIpCameraRequest{
+  int64 id = 1;
+  bool isPrimaryCamera = 2;
+  string publicURI = 3;
+  string privateURI = 4;
+  int64 deviceId = 5;
+}

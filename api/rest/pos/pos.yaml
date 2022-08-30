@@ -1,0 +1,275 @@
+post:
+  tags:
+    - POS
+  summary: Create pos
+  description: Create pos
+  produces:
+    - application/json
+    - application/xml
+  parameters:
+    - name: Create pos
+      in: body
+      schema:
+        type: object
+        properties:
+          serviceName:
+            type: string
+            example: serviceName
+          serviceType:
+            type: string
+            example: serviceType
+          serviceDetail:
+            type: string
+            example: serviceDetail
+          shopsId:
+            type: integer
+            example: 32
+          centerId:
+            type: integer
+            example: 32
+          serviceTemplateId:
+            type: integer
+            example: 15
+          defaultRoutineId:
+            type: integer
+            example: 13
+          defaultAvatarId:
+            type: integer
+            example: 23
+          routineIds:
+            type: integer
+            example:
+              - 43
+              - 52
+              - 34
+          avatarIds:
+            type: integer
+            example:
+              - 10
+              - 56
+              - 22
+              - 45
+  responses:
+    '200':
+      description: Create pos response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int64
+                default: 2
+              serviceName:
+                type: string
+                example: serviceName
+              serviceType:
+                type: string
+                example: serviceType
+              serviceDetail:
+                type: string
+                example: serviceDetail
+              shopsId:
+                type: integer
+                example: 32
+              centerId:
+                type: integer
+                example: 32
+              serviceTemplateId:
+                type: integer
+                example: 15
+              defaultRoutineId:
+                type: integer
+                example: 13
+              defaultAvatarId:
+                type: integer
+                example: 23
+              routineIds:
+                type: integer
+                example:
+                  - 43
+                  - 52
+                  - 34
+              avatarIds:
+                type: integer
+                example:
+                  - 10
+                  - 56
+                  - 22
+                  - 45
+              createdAt:
+                type: string
+                default: '2012-10-15T21:26:17Z'
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: shopId is not exist
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Account not authenticated  
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You don’t have permission to access on this server
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Database not responding
+get:
+  tags:
+    - POS
+  summary: Get list pos
+  description: Get list pos
+  produces:
+    - application/json
+    - application/xml
+  parameters:
+    - name: pos request
+      in: body
+      required: true
+      schema:
+        type: object
+        properties:
+          centerId:
+            type: integer
+            format: int64
+            example: 1
+            description: id of center
+          shopId:
+            type: integer
+            format: int64
+            example: 12
+            description: id of shop
+          page:
+            type: integer
+            format: int64
+            example: 1
+            description: Pages to search for
+          perPage:
+            type: integer
+            format: int64
+            example: 20
+            description: Number of item per page
+  responses:
+    '200':
+      description: pos output
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  format: int64
+                  default: 2
+                serviceName:
+                  type: string
+                  example: serviceName
+                serviceType:
+                  type: string
+                  example: serviceType
+                serviceDetail:
+                  type: string
+                  example: serviceDetail
+                shopsId:
+                  type: integer
+                  example: 32
+                centerId:
+                  type: integer
+                  example: 32
+                serviceTemplateId:
+                  type: integer
+                  example: 15
+                defaultRoutineId:
+                  type: integer
+                  example: 13
+                defaultAvatarId:
+                  type: integer
+                  example: 23
+                routineIds:
+                  type: integer
+                  example:
+                    - 43
+                    - 52
+                    - 34
+                avatarIds:
+                  type: integer
+                  example:
+                    - 10
+                    - 56
+                    - 22
+                    - 45
+                createdAt:
+                  type: string
+                  default: '2012-10-15T21:26:17Z'
+                updatedAt:
+                  type: string
+                  default: '2012-10-15T21:26:17Z'                  
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: centerId is not exist
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Account not authenticated  
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You don’t have permission to access on this server
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Database not responding

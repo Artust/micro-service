@@ -1,0 +1,256 @@
+post:
+  tags:
+    - Monitor
+  summary: Create monitor
+  description: Create monitor
+  produces:
+    - application/json
+    - application/xml
+  parameters:
+    - name: monitor create request
+      in: body
+      required: true
+      schema:
+        type: object
+        properties:
+          maker:
+            type: string
+            example: maker
+            description: CustomerMonitor Creator
+          serialNumber:
+            type: string
+            example: serialNumber
+            description: CustomerMonitor's serial number
+          monitorStatus:
+            type: string
+            example: standby
+            description: CustomerMonitor's status
+          resolutionWidth:
+            type: integer
+            format: int64
+            example: 1920
+            description: Screen Width
+          resolutionHeight:
+            type: integer
+            format: int64
+            example: 1080
+            description: Screen Height
+          rotation:
+            type: integer
+            format: int64
+            example: 1
+            description: The screen rotates horizontally or vertically
+          posID:
+            type: integer
+            format: int64
+            example: 12
+            description: Relationship with which POS
+          avatarID:
+            type: integer
+            format: int64
+            example: 21
+            description: Relationship with which Avatar
+  responses:
+    '200':
+      description: monitor create response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int64
+                default: 2
+              maker:
+                type: string
+                example: maker
+              serialNumber:
+                type: integer
+                format: int64
+                example: serialNumber
+              monitorStatus:
+                type: string
+                format: string
+                example: standBy
+              resolutionWidth:
+                type: integer
+                format: int64
+                example: 1920
+              resolutionHeight:
+                type: integer
+                format: int64
+                example: 1080
+              rotation:
+                type: integer
+                format: int64
+                example: 1
+              posID:
+                type: integer
+                format: int64
+                example: 12
+              avatarID:
+                type: integer
+                format: int64
+                example: 21
+              createdAt:
+                type: string
+                default: '2012-10-15T21:26:17Z'
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: avatarId is not exist
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Account not authenticated
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You don’t have permission to access on this server
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Database not responding
+get:
+  tags:
+    - Monitor
+  summary: Get list monitor
+  description: Get list monitor
+  produces:
+    - application/json
+    - application/xml
+  parameters:
+    - name: list monitors
+      in: body
+      required: true
+      schema:
+        type: object
+        properties:
+          page:
+            type: integer
+            format: int64
+            example: 1
+            description: Pages to search for
+          perPage:
+            type: integer
+            format: int64
+            example: 20
+            description: Number of item per page
+          posId:
+            type: integer
+            format: int64
+            example: 12
+            description: Pos Id of monitor
+  responses:
+    '200':
+      description: monitor create response
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  format: int64
+                  default: 2
+                maker:
+                  type: string
+                  example: maker
+                serialNumber:
+                  type: integer
+                  format: int64
+                  example: serialNumber
+                monitorStatus:
+                  type: string
+                  format: string
+                  example: standBy
+                resolutionWidth:
+                  type: integer
+                  format: int64
+                  example: 1920
+                resolutionHeight:
+                  type: integer
+                  format: int64
+                  example: 1080
+                rotation:
+                  type: integer
+                  format: int64
+                  example: 1
+                posID:
+                  type: integer
+                  format: int64
+                  example: 12
+                avatarID:
+                  type: integer
+                  format: int64
+                  example: 21
+                createdAt:
+                  type: string
+                  default: '2012-10-15T21:26:17Z'
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: customerMonitorId is not exist
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Account not authenticated
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You don’t have permission to access on this server
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Database not responding

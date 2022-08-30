@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+option go_package = "/protos";
+option csharp_namespace = "Avatar.GRPCCore";
+
+package avatar;
+
+service Avatar {
+  rpc StreamOperatorSideVideo(stream Data) returns (stream Data) {}
+  rpc StreamOperatorSideVoice(stream Data) returns (stream Data) {}
+  rpc StreamPOSSideVideo(stream Data) returns (stream Data) {}
+  rpc StreamPOSSideVoice(stream Data) returns (stream Data) {}
+  rpc SpeechToText(Empty) returns (stream SpeechToTextData) {}
+  rpc ListenEventPOSSide(Empty) returns (stream ListenEventPOSSideResponse) {}
+  rpc ListenEventOperatorSide(Empty) returns (stream ListenEventOperatorSideResponse) {}
+  rpc ListenNotes(Empty) returns (stream ListenEventResponse) {}
+  rpc ListenListPos(Empty) returns  (stream ListenListPosResponse){}
+}
+
+message Data { bytes data = 1; }
+message SpeechToTextData {
+  string speaker = 1;
+  string content = 2;
+  string sendingTime = 3;
+}
+message Empty {}
+
+message ListPosResponse{
+  int64 posId = 1;
+  int64 talkSessionId = 2;
+  int32 status = 3;
+  bool mainPos = 4;
+  repeated int64 cameraId = 5;
+  int64 defaultCameraId = 6;
+  string rtspServerUri = 7;
+  string name = 8;
+  string address = 9;
+  string detectedAt = 10;
+}
+
+message ListenListPosResponse{
+  repeated ListPosResponse ListPosResponse = 1;
+}
+
+message ListenEventOperatorSideResponse {
+  string event = 1;
+  string payload = 2;
+}
+message ListenEventPOSSideResponse {
+  string event = 1;
+  string payload = 2;
+}
+message ListenEventResponse {
+  int32 event = 1;
+  string payload = 2;
+}

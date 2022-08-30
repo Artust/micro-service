@@ -1,0 +1,75 @@
+post:
+  tags:
+    - Trigger Event
+  summary: Play Routine
+  description: Play Routine
+  produces:
+    - application/json
+    - application/xml
+  parameters:
+    - name: Play Routine request
+      in: body
+      required: true
+      schema:
+        type: object
+        properties:
+          event:
+            type: string
+            example: PlayRoutine
+          payload:
+            type: string
+
+  responses:
+    '200':
+      description: ipcamera create response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              event:
+                type: string
+                example: PlayRoutine
+              payload:
+                type: string
+                example: "{\"ID\":37,\"AnimationKey\":\"http://localhost:4566/routine/animationKeyRoutine.dat\",\"SoundFile\":\"http://localhost:4566/routine/soundRoutine.wav\"}"
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: posId is not exist
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Account not authenticated
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You don’t have permission to access on this server
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Database not responding

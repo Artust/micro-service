@@ -1,0 +1,271 @@
+syntax = "proto3";
+
+option go_package = "/proto";
+
+package center;
+
+service Center {
+    rpc CreateRoutine (CreateRoutineRequest) returns (CreateRoutineResponse) {}
+    rpc GetRoutine (GetByIdRequest) returns (CreateRoutineResponse) {}
+    rpc GetListRoutine (GetListRoutineRequest) returns (GetListRoutineResponse) {}
+    rpc UpdateRoutine (UpdateRoutineRequest) returns (CreateRoutineResponse) {}
+    rpc DeleteRoutine (DeleteByIdRequest) returns (DeleteResponse) {}
+    rpc GetListRoutineByCategory (GetListRoutineByCategoryRequest) returns (GetListRoutineByCategoryResponse){}
+
+    rpc CreateAvatar (CreateAvatarRequest) returns (CreateAvatarResponse) {}
+    rpc GetAvatar (GetByIdRequest) returns (CreateAvatarResponse) {}
+    rpc GetListAvatar (GetListAvatarRequest) returns (GetListAvatarResponse) {}
+    rpc UpdateAvatar (CreateAvatarRequest) returns (CreateAvatarResponse) {}
+    rpc DeleteAvatar (DeleteByIdRequest) returns (DeleteResponse) {}
+
+    rpc CreateRoutineCategory (CreateRoutineCategoryRequest) returns (CreateRoutineCategoryResponse) {}
+    rpc GetRoutineCategory (GetByIdRequest) returns (CreateRoutineCategoryResponse){}
+    rpc GetListRoutineCategory (GetListRoutineCategoryRequest) returns (GetListRoutineCategoryResponse){}
+    rpc UpdateRoutineCategory (UpdateRoutineCategoryRequest) returns (CreateRoutineCategoryResponse) {}
+    rpc DeleteRoutineCategory (DeleteByIdRequest) returns (DeleteResponse) {}
+
+    rpc CreateServiceTemplate (CreateServiceTemplateRequest) returns (CreateServiceTemplateResponse) {}
+    rpc GetServiceTemplate (GetByIdRequest) returns (CreateServiceTemplateResponse){}
+    rpc GetListServiceTemplate (GetListServiceTemplateRequest) returns (GetListServiceTemplateResponse){}
+    rpc UpdateServiceTemplate (UpdateServiceTemplateRequest) returns (CreateServiceTemplateResponse) {}
+    rpc DeleteServiceTemplate (DeleteByIdRequest) returns (DeleteResponse) {}
+
+    rpc CreateServiceTemplateCategory (CreateServiceTemplateCategoryRequest) returns (CreateServiceTemplateCategoryResponse) {}
+    rpc GetServiceTemplateCategory (GetByIdRequest) returns (CreateServiceTemplateCategoryResponse){}
+    rpc GetListServiceTemplateCategory (GetListServiceTemplateCategoryRequest) returns (GetListServiceTemplateCategoryResponse){}
+    rpc UpdateServiceTemplateCategory (UpdateServiceTemplateCategoryRequest) returns (CreateServiceTemplateCategoryResponse) {}
+    rpc DeleteServiceTemplateCategory (DeleteByIdRequest) returns (DeleteResponse) {}
+}
+
+message GetByIdRequest{
+    int64 id = 1;   
+}
+
+message DeleteByIdRequest{
+    int64 id = 1;   
+}
+
+message DeleteResponse{
+    int64 rowsAffected = 1;
+}
+
+message ListRoutineByCategory{
+    CreateRoutineCategoryResponse category = 1;
+    repeated CreateRoutineResponse routine = 2;
+}
+
+message GetListRoutineByCategoryRequest{
+    int64 serviceTemplateId = 1;
+    int64 page = 2;
+    int64 perPage = 3;
+    repeated int64 categoryIds = 4;
+    repeated int64 ids = 5;
+  }
+  
+message GetListRoutineByCategoryResponse{
+    repeated ListRoutineByCategory getListRoutineByCategoryResponse = 1;
+}
+
+  
+message CreateRoutineRequest{
+    string name = 1;
+    string detail = 2; 
+    string animationFile = 3;
+    string imageFile = 9;
+    string soundFile = 6;
+    string startDate = 7;
+    string endDate = 8;
+    int64 categoryId = 11;
+    int64 gender = 14;
+}
+
+message CreateRoutineResponse{
+    int64 id = 1;   
+    string name = 2;
+    string detail = 3; 
+    string animationFile = 4;
+    string imageFile = 5;
+    string soundFile = 6;
+    string startDate = 7;
+    string endDate = 8;
+    int64 categoryId = 9;
+    int64 gender = 11;
+    string createdAt = 12;
+    string updatedAt = 13;
+}
+
+message GetListRoutineRequest{
+    int64 page = 1;
+    int64 perPage = 2;
+    int64 categoryId = 4;
+    int64 gender = 5;
+    repeated int64 ids = 6;
+}
+
+message GetListRoutineResponse{
+    repeated CreateRoutineResponse ListRoutine = 1;
+}
+
+message UpdateRoutineRequest{
+    int64 id = 1;   
+    string name = 2;
+    string detail = 3; 
+    string animationFile = 4;
+    string imageFile = 5;
+    string soundFile = 6;
+    string startDate = 7;
+    string endDate = 8;
+    int64 categoryId = 9;
+    int64 gender = 11;
+}
+
+message CreateServiceTemplateRequest{
+    string name = 1;
+    string detail = 2; 
+    int64 corporationId = 3;
+    repeated int64 maleRoutineIds = 4;
+    repeated int64 defaultMaleRoutineIds = 5;
+    repeated int64 femaleRoutineIds = 7;
+    repeated int64 defaultFemaleRoutineIds = 8;
+    int64 defaultMaleAvatarId = 10;
+    int64 defaultFemaleAvatarId = 11;
+    repeated int64 avatarIds = 12;
+    int64 createdBy = 13;
+    int64 serviceTemplateCategory = 14;
+    repeated string backgrounds = 15;
+    string defaultBackground = 16;
+}
+
+message CreateServiceTemplateResponse{
+    int64 id = 1;
+    string name = 2;
+    string detail = 3; 
+    int64 corporationId = 4;
+    repeated int64 maleRoutineIds = 5;
+    repeated int64 defaultMaleRoutineIds = 6;
+    repeated int64 femaleRoutineIds = 8;
+    repeated int64 defaultFemaleRoutineIds = 9;
+    int64 defaultMaleAvatarId = 10;
+    int64 defaultFemaleAvatarId = 11;
+    repeated int64 avatarIds = 12;
+    int64 createdBy = 13;
+    int64 serviceTemplateCategory = 14;
+    repeated string backgrounds = 15;
+    string defaultBackground = 16;
+    string createdAt = 17;
+    string updatedAt = 18;
+
+}
+
+message GetListServiceTemplateRequest{
+    int64 corporationId = 1;
+    int64 page = 2;
+    int64 perPage = 3;
+    int64 serviceTemplateCategoryId = 12;
+}
+
+message GetListServiceTemplateResponse{
+    repeated CreateServiceTemplateResponse ListServiceTemplate = 1;
+}
+
+message UpdateServiceTemplateRequest{
+    int64 id = 1;
+    string name = 2;
+    string detail = 3; 
+    int64 corporationId = 4;
+    repeated int64 maleRoutineIds = 5;
+    repeated int64 defaultMaleRoutineIds = 6;
+    repeated int64 femaleRoutineIds = 8;
+    repeated int64 defaultFemaleRoutineIds = 9;
+    int64 defaultMaleAvatarId = 10;
+    int64 defaultFemaleAvatarId = 11;
+    repeated int64 avatarIds = 12;
+    int64 createdBy = 13;
+    int64 serviceTemplateCategory = 14;
+    repeated string backgrounds = 15;
+    string defaultBackground = 16;
+}
+message GetListAvatarRequest{
+    int64 gender = 1;
+    int64 page = 2;
+    int64 perPage = 3;
+    repeated int64 ids = 4;
+}
+message GetListAvatarResponse{
+    repeated CreateAvatarResponse avatars = 1;
+}
+message CreateAvatarRequest{
+    int64 id = 1;
+    string name = 2;
+    string detail = 3;
+    string image = 4;
+    string vrm = 5;
+    string startDate = 6;
+    string endDate = 7;
+    int64 gender = 8;
+    string version = 9;
+    string exporter = 10;
+}
+
+message CreateAvatarResponse{
+    int64 id = 1;
+    string name = 2;
+    string detail = 3;
+    string image = 4;
+    string vrm = 5;
+    string startDate = 6;
+    string endDate = 7;
+    int64 gender = 8;
+    string version = 9;
+    string exporter = 10;
+    string createdAt = 11;
+    string updatedAt = 12;
+}
+
+message CreateRoutineCategoryRequest{
+    string name =1;
+}
+
+message CreateRoutineCategoryResponse{
+    int64 id = 1;
+    string name = 2;
+    string createdAt = 3;
+    string updatedAt = 4;
+}
+message GetListRoutineCategoryRequest {
+    int64 page = 1;
+    int64 perPage = 2;
+}
+
+message GetListRoutineCategoryResponse{
+    repeated CreateRoutineResponse GetListRoutineCategoryResponse = 1;
+}
+
+message UpdateRoutineCategoryRequest{
+    int64 id = 1;
+    string name = 2;
+}
+
+message CreateServiceTemplateCategoryRequest{
+    string name =1;
+}
+
+message CreateServiceTemplateCategoryResponse{
+    int64 id = 1;
+    string name = 2;
+    string createdAt = 3;
+    string updatedAt = 4;
+}
+message GetListServiceTemplateCategoryRequest {
+    int64 page = 1;
+    int64 perPage = 2;
+}
+
+message GetListServiceTemplateCategoryResponse{
+    repeated CreateServiceTemplateCategoryResponse GetListServiceTemplateCategoryResponse = 1;
+}
+
+message UpdateServiceTemplateCategoryRequest{
+    int64 id = 1;
+    string name = 2;
+}

@@ -1,0 +1,112 @@
+post:
+  tags:
+    - POS Avatar
+  summary: Create avatars
+  description: Create avatars
+  produces:
+    - application/json
+    - application/xml
+  parameters:
+    - name: avatars create request
+      in: body
+      required: true
+      schema:
+        type: object
+        properties:
+          name:
+            type: string
+            example: name
+            description: Name of Avatar
+          detail:
+            type: string
+            example: detail
+            description: Detail of Avatar
+          imageLink:
+            type: string
+            example: imageLink
+            description: Image Link of Avatar
+          vrmLink:
+            type: string
+            example: vrmLink
+            description: Vrm Link of Avatar
+          startDate:
+            type: string
+            example: startDate
+            description: Start Date of Avatar
+          endDate:
+            type: string
+            example: endDate
+            description: End Date of Avatar
+  responses:
+    '200':
+      description: avatars create response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int64
+                default: 2
+              name:
+                type: string
+                example: name
+              detail:
+                type: string
+                example: detail
+              imageLink:
+                type: string
+                example: imageLink
+              vrmLink:
+                type: string
+                example: vrmLink
+              startDate:
+                type: string
+                example: startDate
+              endDate:
+                type: string
+                example: endDate
+              createdAt:
+                type: string
+                default: '2012-10-15T21:26:17Z'
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: VRMLink is must be string
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Account not authenticated  
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You don’t have permission to access on this server
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Database not responding

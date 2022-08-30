@@ -1,0 +1,105 @@
+openapi: 3.0.0
+info:
+  description: |
+    API Design : Public for Client (gRPC + Rest)
+  version: 1.0.2
+  title: Swagger avatar
+tags:
+  - name: Public for Client (gRPC + Rest)
+    externalDocs:
+      description: Find out more
+      url: https://docs.google.com/spreadsheets/d/1qw3NqLKezwwZVB4006YO5lx4JgR3bGiZwNs6TU1JJo4/edit#gid=253292602
+
+servers:
+  - url: http://localhost:8081/api
+    description: Local Server
+  - url: http://18.182.29.173:8081/api
+    description: Development 
+
+paths:
+  /login:
+    $ref: authentication/login.yaml
+  /accounts:
+    $ref: account/account.yaml
+  /accounts/id:
+    $ref: account/account/_id.yaml
+  /account-roles:
+    $ref: account/account_role.yaml
+  /account-roles/id:
+    $ref: account/account_role/_id.yaml
+  /permissions:
+    $ref: permissions/permission.yaml
+  /permissions/id:
+    $ref: permissions/permission/_id.yaml
+  /forgot-password:
+    $ref: forgot_password/forgot_password.yaml
+  /reset-password/tokens:
+    $ref: reset_password/reset_password.yaml
+  /change-password:
+    $ref: change_password/change_password.yaml
+  /talk-session-histories:
+    $ref: talk_session_histories/talk_session_histories.yaml
+  /talk-session-histories/id:
+    $ref: talk_session_histories/talk_session_histories/_id.yaml
+  /talk-session-notes:
+    $ref: talk_session_notes/talk_session_notes.yaml
+  /talk-session-notes/id:
+    $ref: talk_session_notes/talk_session_notes/_id.yaml
+  /talk-sessions:
+    $ref: talk_sessions/talk_session.yaml
+  /talk-sessions/id:
+    $ref: talk_sessions/talk_session/_id.yaml
+  /pos:
+    $ref: pos/pos.yaml
+  /pos/id:
+    $ref: pos/pos/_id.yaml
+  /service-templates/avatars:
+    $ref: service_templates/avatar/avatar.yaml
+  /service-templates/avatars/id:
+    $ref: service_templates/avatar/avatar/_id.yaml
+  /service-templates/routines:
+    $ref: service_templates/routine/routine.yaml
+  /service-templates/routines/id:
+    $ref: service_templates/routine/routine/_id.yaml
+  /service-templates:
+    $ref: service_templates/service_template.yaml
+  /service-templates/id:
+    $ref: service_templates/service_template/_id.yaml
+  /monitors:
+    $ref: monitors/monitors.yaml
+  /monitors/id:
+    $ref: monitors/monitors/_id.yaml
+  /ip-cameras:
+    $ref: ip_cameras/ip_cameras.yaml
+  /ip-cameras/id:
+    $ref: ip_cameras/ip_cameras/_id.yaml
+  /trigger-event-pos-side:
+    $ref: trigger_event_pos/trigger_event_pos.yaml
+  /play-routines:
+    $ref: play_routines/play_routine.yaml
+  /trigger-event-operator-side:
+    $ref: trigger_event_operator/trigger_event_operator.yaml
+  /pos/routines:
+    $ref: pos/routines/routines.yaml
+  /pos/routines/id:
+    $ref: pos/routines/routines/_id.yaml
+  /pos/avatars:
+    $ref: pos/avatars/avatars.yaml
+  /pos/avatars/id:
+    $ref: pos/avatars/avatars/_id.yaml
+  /shops:
+    $ref: shops/shops.yaml
+  /shops/id:
+    $ref: shops/shops/_id.yaml
+  /centers:
+    $ref: centers/centers.yaml
+  /centers/id:
+    $ref: centers/centers/_id.yaml
+  /corporations:
+     $ref: corporations/corporations.yaml
+  /corporations/id:
+    $ref: corporations/corporations/_id.yaml
+  /devices:
+    $ref: devices/device.yaml
+  /devices/id:
+    $ref: devices/device/_id.yaml

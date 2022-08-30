@@ -1,0 +1,234 @@
+syntax = "proto3";
+
+option go_package = "/protos";
+
+package account_management;
+
+service AccountManagement {
+  // Auth
+  rpc Login (LoginRequest) returns (LoginResponse) {}
+  rpc ForgotPassword (ForgotPasswordRequest) returns (Empty) {}
+  rpc ResetPassword (ResetPasswordRequest) returns (Empty) {}
+  // Account
+  rpc GetAccount (Id) returns (Account) {}
+  rpc GetListAccount (GetListAccountRequest) returns (AccountList) {}
+  rpc CreateAccount (CreateAccountRequest) returns (Account) {}
+  rpc UpdateAccount (UpdateAccountRequest) returns (Account) {}
+  rpc ChangePassword (ChangePasswordRequest) returns (Empty) {}
+  rpc DeactiveAccount (DeactiveAccountRequest) returns (Empty) {}
+  rpc ActiveAccount (ActiveAccountRequest) returns (Empty) {}
+  // Permission
+  rpc GetPermission (Id) returns (Permission) {}
+  rpc GetListPermission (Empty) returns (PermissionList) {}
+  rpc CreatePermission (CreatePermissionRequest) returns (Permission) {}
+  rpc UpdatePermission (UpdatePermissionRequest) returns (Permission) {}
+  rpc DeletePermission (DeletePermissionRequest) returns (Empty) {}
+  // Role
+  rpc GetAccountRole (Id) returns (AccountRole) {}
+  rpc GetListAccountRole (Empty) returns (AccountRoleList) {}
+  rpc CreateAccountRole (CreateAccountRoleRequest) returns (AccountRole) {}
+  rpc UpdateAccountRole (UpdateAccountRoleRequest) returns (AccountRole) {}
+  rpc DeleteAccountRole (DeleteAccountRoleRequest) returns (Empty) {}
+  // Activity
+  rpc GetUserActivity (AccountId) returns (UserActivityList) {}
+  rpc SaveUserActivity (UserActivity) returns (UserActivity) {}
+}
+
+message Account{
+	int64  id        = 1;
+	string email     = 2;
+	string username  = 3;
+	string password  = 4;
+	int64  gender    = 5;
+	int64  roleId    = 6;
+	int64  centerId  = 7;
+	int64  status    = 8;
+	int64  createdBy = 9;
+	string createdAt = 10;
+  string avatar = 11;
+	string updatedAt = 12;
+	string deletedAt = 13;
+}
+
+enum Gender {
+  Gender_UNSPECIFIED = 0;
+  MALE               = 1;
+  FEMALE             = 2;
+  OTHER              = 3;
+}
+
+enum StatusActive {
+  Status_UNSPECIFIED = 0;
+  Active             = 1;
+  Deactive           = 2;
+}
+
+message Id {
+  int64 id = 1;
+}
+
+message Empty{
+}
+
+// Authentication
+message LoginRequest {
+  string email    = 1;
+  string password = 2;
+}
+message LoginResponse {
+  string token = 1;
+  int64 userId = 2;
+  string displayName = 3;
+  string avatar = 4;
+  int64 gender = 5;
+}
+
+message ForgotPasswordRequest{
+  string email = 1;
+}
+
+message ResetPasswordRequest{
+  string newPassword      = 1;
+}
+
+// Account
+message GetListAccountRequest {
+	int64 page     = 1;
+	int64 perPage  = 2;
+	int64 gender   = 5;
+	int64 roleId   = 6;
+	int64 centerId = 7;
+	int64 status   = 8;
+}
+
+message AccountList {
+  repeated Account accounts = 1;
+}
+
+message CreateAccountRequest{
+  string email    = 1;
+  string username = 2;
+  int64 roleId    = 4;
+  int64 centerId  = 5;
+  int64 gender    = 6; 
+  string avatar = 7;
+}
+
+message UpdateAccountRequest{
+  int64 id        = 1;
+  string email    = 2;
+  string username = 3;
+  int64 gender    = 4;
+  int64 roleId    = 5;
+  string avatar = 6;
+}
+
+message ChangePasswordRequest{
+  int64 id                = 1;
+  string password         = 2;
+  string newPassword      = 3;
+}
+
+message DeactiveAccountRequest{
+  int64 id = 1;
+}
+
+message ActiveAccountRequest{
+  int64 id = 1;
+}
+
+// Permission
+message Permission{
+  int64 id                = 1;
+  string entity           = 2;
+  string permissionAction = 3;
+  string createdAt        = 4;
+  string updatedAt        = 5;
+  string deletedAt        = 6;
+}
+
+enum Action {
+  Action_UNSPECIFIED = 0;
+  CREATE             = 1;
+  READ               = 2;
+  UPDATE             = 3;
+  DELETE             = 4;
+}
+
+message PermissionList {
+  repeated Permission permissions = 1;
+}
+
+message CreatePermissionRequest{
+  string entity           = 1;
+  string permissionAction = 2;
+}
+
+message UpdatePermissionRequest{
+  int64 id                = 1;
+  string entity           = 2;
+  string permissionAction = 3;
+}
+
+message DeletePermissionRequest{
+  int64 id = 1;
+}
+
+// Role
+message AccountRole{
+  int64 id                      = 1;
+  string name                   = 2;
+  repeated int64 permissionIds  = 3;
+  int64 level                   = 4;
+  int64 typeRole                = 5;
+  string createdAt              = 6;
+  string updatedAt              = 7;
+  string deletedAt              = 8;
+}
+
+enum TypeRole {
+  TypeRole_UNSPECIFIED = 0;
+  CENTER_ADMIN         = 1;
+  OPERATOR             = 2;
+  SUPPORTER            = 3;
+}
+
+message AccountRoleList {
+  repeated AccountRole accountRoles = 1;
+}
+
+message CreateAccountRoleRequest{
+  string name                   = 1;
+  repeated int64 permissionIds  = 2;
+  int64 level                   = 3;
+}
+
+message UpdateAccountRoleRequest{
+  int64 id                      = 1;
+  string name                   = 2;
+  repeated int64 permissionIds  = 3;
+  int64 level                   = 4;
+}
+
+message DeleteAccountRoleRequest{
+  int64 id = 1;
+}
+
+// User activity
+message AccountId {
+  int64 accountId = 1;
+}
+
+message UserActivity{
+	int64  id          = 1;
+	string name        = 2;
+	string description = 3;
+	int64  accountId   = 4;
+	string createdAt   = 5;
+	string updatedAt   = 6;
+	string deletedAt   = 7;
+}
+
+message UserActivityList {
+  repeated UserActivity activities = 1;
+}

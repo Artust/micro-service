@@ -1,0 +1,191 @@
+post:
+  tags:
+    - Account Permission
+  summary: Create permission
+  description: Create permission
+  produces:
+    - application/json
+    - application/xml
+  parameters:
+    - name: permission request
+      in: body
+      required: true
+      schema:
+        type: object
+        properties:
+          accountRoleId:
+            type: integer
+            format: int64
+            example: 5
+          entity:
+            type: string
+            format: string
+          permissionAction:
+            type: string
+            format: string
+            example: permissionAction
+  responses:
+    '200':
+      description: Create permission successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int64
+                example: 2
+              accountRoleId:
+                type: integer
+                format: int64
+                example: 5
+              entity:
+                type: string
+                format: string
+              permissionAction:
+                type: string
+                format: string
+                example: permissionAction
+              roleId:
+                type: integer
+                format: int64
+                example: 3
+              createdAt:
+                type: string
+                default: '2012-10-15T21:26:17Z'
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: accountRoleId does not exist
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Account not authenticated
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You don’t have permission to access on this server
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Database not responding
+get:
+  tags:
+    - Account Permission
+  summary: Get list permission
+  description: Get list permission
+  produces:
+    - application/json
+    - application/xml
+  parameters:
+    - name: permission
+      in: body
+      required: true
+      schema:
+        type: object
+        properties:
+          accountRoleId:
+            type: integer
+            format: int64
+            example: 1
+            description: account role
+          page:
+            type: integer
+            format: int64
+            example: 1
+            description: Pages to search for
+          perPage:
+            type: integer
+            format: int64
+            example: 20
+            description: Number of item per page
+  responses:
+    '200':
+      description: Get list permission response
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  format: int64
+                  example: 2
+                accountRoleId:
+                  type: integer
+                  format: int64
+                  example: 5
+                entity:
+                  type: string
+                  format: string
+                permissionAction:
+                  type: string
+                  format: string
+                  example: permissionAction
+                roleId:
+                  type: integer
+                  format: int64
+                  example: 3
+                createdAt:
+                  type: string
+                  default: '2012-10-15T21:26:17Z'
+                updatedAt:
+                  type: string
+                  default: '2012-10-15T21:26:17Z'
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Account not authenticated
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You don’t have permission to access on this server
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Database not responding

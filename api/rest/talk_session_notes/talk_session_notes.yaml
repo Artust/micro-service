@@ -1,0 +1,189 @@
+post:
+  tags:
+    - Talk Session Note
+  summary: Create notes
+  description: Create notes
+  produces:
+    - application/json
+    - application/xml
+  parameters:
+    - name: Create notes request
+      in: body
+      schema:
+        type: object
+        properties:
+          talkSessionId:
+            type: integer
+            format: int64
+            example: 4
+          content:
+            type: string
+            format: string
+          private:
+            type: boolean
+            default: true
+  responses:
+    '200':
+      description: Create notes response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int64
+                default: 2
+              talkSessionId:
+                type: integer
+                format: int64
+                example: 4
+              content:
+                type: string
+                format: string
+              private:
+                type: boolean
+                default: true
+              createdAt:
+                type: string
+                default: '2012-10-15T21:26:17Z'
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: talkSessionId does not exist
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Account not authenticated  
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You don’t have permission to access on this server
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Database not responding
+get:
+  tags:
+    - Talk Session Note
+  summary: Get list notes
+  description: Get list notes
+  produces:
+    - application/json
+    - application/xml
+  parameters:
+    - name: notes
+      in: body
+      required: true
+      schema:
+        type: object
+        properties:
+          talkSessionId:
+            type: integer
+            format: int64
+            example: 1
+            description: Talk session id
+          page:
+            type: integer
+            format: int64
+            example: 1
+            description: Pages to search for
+          perPage:
+            type: integer
+            format: int64
+            example: 20
+            description: Number of item per page
+  responses:
+    '200':
+      description: notes output
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  format: int64
+                  default: 2
+                talkSessionId:
+                  type: integer
+                  format: int64
+                  example: 4
+                content:
+                  type: string
+                  format: string
+                private:
+                  type: boolean
+                  default: true
+                createdAt:
+                  type: string
+                  default: '2012-10-15T21:26:17Z'
+                updatedAt:
+                  type: string
+                  default: '2012-10-15T21:26:17Z'
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: talkSessionId does not exist
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Account not authenticated  
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You don’t have permission to access on this server
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Database not responding

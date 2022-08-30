@@ -1,0 +1,96 @@
+version: "3.8"
+
+services:
+  swagger-editor:
+    image: swaggerapi/swagger-editor
+    logging:
+      driver: none
+    volumes:
+      - ./api/rest:/tmp
+    environment:
+      SWAGGER_FILE: /tmp/swagger.yaml
+    ports:
+      - 8090:8080
+    restart: always
+
+  localstack:
+    image: localstack/localstack:latest
+    container_name: localstack
+    environment: 
+      - AWS_DEFAULT_REGION=us-east-1
+      - EDGE_PORT=4566
+      - SERVICES=s3
+      - DATA_DIR=/tmp/localstack/data
+    ports: 
+      - '4566-4583:4566-4583'
+    volumes: 
+      - ".docker/data/localstack:/tmp/localstack"
+    restart: always
+    networks:
+      - app-tier
+
+  zookeeper:
+    image: bitnami/zookeeper:3.6.2
+    container_name: zookeeper
+    user: root
+    volumes:
+      - .docker/data/zookeeper:/bitnami/zookeeper
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    restart: always
+    networks:
+      - app-tier
+
+  neo4j:
+    image: neo4j:4.4.4-community
+    ports:
+      - 7474:7474
+      - 7687:7687
+    container_name: neo4j
+    user: root
+    volumes:
+      - .docker/data/neo4j:/data
+    restart: always
+    environment:
+      - NEO4J_AUTH=neo4j/fabbi@2022
+    networks:
+      - app-tier
+
+  kafka:
+    image: bitnami/kafka:2.6.0
+    ports:
+      - 9093:9093
+    user: root
+    container_name: kafka
+    environment:
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
+      - KAFKA_CFG_LISTENERS=CLIENT://:9092,EXTERNAL://:9093
+      - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://kafka:9092,EXTERNAL://localhost:9093
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=CLIENT
+    volumes:
+      - .docker/data/kafka:/bitnami/kafka
+    depends_on:
+      - zookeeper
+    restart: always
+    networks:
+      - app-tier
+      
+  kafka-manager:
+    image: hlebalbau/kafka-manager:stable
+    container_name: kafka-manager
+    ports:
+      - 9000:9000
+    links:
+      - zookeeper
+    environment:
+      ZK_HOSTS: zookeeper:2181
+    restart: always
+    networks:
+      - app-tier
+
+networks:
+  app-tier:
+    driver: bridge
+    name: app-tier

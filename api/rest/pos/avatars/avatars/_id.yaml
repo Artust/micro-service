@@ -1,0 +1,282 @@
+put:
+  tags:
+    - POS Avatar
+  summary: Update avatars
+  description: Update avatars
+  produces:
+    - application/json
+    - application/xml
+  parameters:
+    - name: id
+      in: path
+      description: ID of avatars
+      required: true
+      type: integer
+      format: int64
+      default: 1
+    - name: avatars update request
+      in: body
+      required: true
+      schema:
+        type: object
+        properties:
+          name:
+            type: string
+            example: name
+            description: Name of Avatar
+          detail:
+            type: string
+            example: detail
+            description: Detail of Avatar
+          imageLink:
+            type: string
+            example: imageLink
+            description: Image Link of Avatar
+          vrmLink:
+            type: string
+            example: vrmLink
+            description: Vrm Link of Avatar
+          startDate:
+            type: string
+            example: startDate
+            description: Start Date of Avatar
+          endDate:
+            type: string
+            example: endDate
+            description: End Date of Avatar
+  responses:
+    '200':
+      description: routines update response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int64
+                default: 2
+              name:
+                type: string
+                example: name
+              detail:
+                type: string
+                example: detail
+              imageLink:
+                type: string
+                example: imageLink
+              vrmLink:
+                type: string
+                example: vrmLink
+              startDate:
+                type: string
+                example: startDate
+              endDate:
+                type: string
+                example: endDate
+              createdAt:
+                type: string
+                default: '2012-10-15T21:26:17Z'
+              updatedAt:
+                type: string
+                default: '2012-10-15T21:26:17Z'
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: id is not exist
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Account not authenticated  
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You don’t have permission to access on this server
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Database not responding
+get:
+  tags:
+    - POS Avatar
+  summary: Get avatars
+  description: Update avatars
+  produces:
+    - application/json
+    - application/xml
+  parameters:
+    - name: id
+      in: path
+      description: ID of avatars
+      required: true
+      type: integer
+      format: int64
+      default: 1
+  responses:
+    '200':
+      description: avatars get response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int64
+                default: 2
+              name:
+                type: string
+                example: name
+              detail:
+                type: string
+                example: detail
+              imageLink:
+                type: string
+                example: imageLink
+              vrmLink:
+                type: string
+                example: vrmLink
+              startDate:
+                type: string
+                example: startDate
+              endDate:
+                type: string
+                example: endDate
+              createdAt:
+                type: string
+                default: '2012-10-15T21:26:17Z'
+              updatedAt:
+                type: string
+                default: '2012-10-15T21:26:17Z'
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: id is not exist
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Account not authenticated  
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You don’t have permission to access on this server
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Database not responding
+delete:
+  tags:
+    - POS Avatar
+  summary: Delete avatars
+  description: Delete avatars
+  produces:
+    - application/json
+    - application/xml
+  parameters:
+    - name: id
+      in: path
+      description: ID of avatars
+      required: true
+      type: integer
+      format: int64
+      default: 1
+  responses:
+    '200':
+      description: Delete avatars successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              rowAffected:
+                type: integer
+                format: int64
+                default: 1
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: id is not exist
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Account not authenticated  
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You don’t have permission to access on this server
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Database not responding

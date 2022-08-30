@@ -1,0 +1,218 @@
+post:
+  tags:
+    - Service Template  Avatar
+  summary: Create avatar
+  description: Create avatar
+  produces:
+    - application/json
+    - application/xml
+  parameters:
+    - name: Create avatar
+      in: body
+      schema:
+        type: object
+        properties:
+          name:
+            type: string
+            example: name
+          detail:
+            type: string
+            example: detail
+          imageLink:
+            type: string
+            example: imageLink
+          vrmLink:
+            type: string
+            example: vrmLink
+          startDate:
+            type: string
+            example: startDate
+          endDate:
+            type: string
+            example: endDate
+          serviceTemplateID:
+            type: integer
+            example: 23
+  responses:
+    '200':
+      description: Create avatar response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int64
+                default: 2
+              name:
+                type: string
+                example: name
+              detail:
+                type: string
+                example: detail
+              imageLink:
+                type: string
+                example: imageLink
+              vrmLink:
+                type: string
+                example: vrmLink
+              startDate:
+                type: string
+                example: startDate
+              endDate:
+                type: string
+                example: endDate
+              serviceTemplateID:
+                type: integer
+                example: 23
+              createdAt:
+                type: string
+                default: '2012-10-15T21:26:17Z'
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: posId is not exist
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Account not authenticated
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You don’t have permission to access on this server
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Database not responding
+get:
+  tags:
+    - Service Template  Avatar
+  summary: Get list avatar
+  description: Get list avatar
+  produces:
+    - application/json
+    - application/xml
+  parameters:
+    - name: avatar request
+      in: body
+      required: true
+      schema:
+        type: object
+        properties:
+          serviceTemplateID:
+            type: integer
+            format: int64
+            example: 1
+            description: id of service template
+          page:
+            type: integer
+            format: int64
+            example: 1
+            description: Pages to search for
+          perPage:
+            type: integer
+            format: int64
+            example: 20
+            description: Number of item per page
+  responses:
+    '200':
+      description: avatar output
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  format: int64
+                  default: 2
+                name:
+                  type: string
+                  example: name
+                detail:
+                  type: string
+                  example: detail
+                imageLink:
+                  type: string
+                  example: imageLink
+                vrmLink:
+                  type: string
+                  example: vrmLink
+                startDate:
+                  type: string
+                  example: startDate
+                endDate:
+                  type: string
+                  example: endDate
+                serviceTemplateID:
+                  type: integer
+                  example: 23
+                createdAt:
+                  type: string
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: serviceTemplateId is not exist
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Account not authenticated
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: You don’t have permission to access on this server
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Database not responding

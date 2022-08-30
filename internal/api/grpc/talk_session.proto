@@ -1,0 +1,159 @@
+syntax = "proto3";
+
+option go_package = "/protos";
+
+package talk_session;
+
+service TalkSession {
+    rpc SaveSpeechToText (SaveSpeechToTextRequest) returns (Empty) {}
+    rpc CreateTalkSessionHistory (CreateTalkSessionHistoryRequest) returns (CreateTalkSessionHistoryResponse) {}
+    rpc EndTalkSessionHistory (EndTalkSessionHistoryRequest) returns (EndTalkSessionHistoryResponse) {}
+    rpc GetTalkSessionHistoryByTalkSession (GetTalkSessionHistoryByTalkSessionRequest) returns (GetTalkSessionHistoryByTalkSessionResponse) {}
+
+    rpc CreateNote (CreateNoteRequest) returns (CreateNoteResponse) {}
+    rpc GetListNote (GetListNoteRequest) returns (GetListNoteResponse) {}
+    rpc UpdateNote (UpdateNoteRequest) returns (CreateNoteResponse) {}
+    rpc DeleteNote (DeleteNoteRequest) returns (DeleteNoteResponse) {}
+
+    rpc CreateTalkSession (CreateTalkSessionRequest) returns (CreateTalkSessionResponse) {}
+    rpc UpdateTalkSession (UpdateTalkSessionRequest) returns (UpdateTalkSessionResponse) {}
+    rpc GetTalkSession (GetTalkSessionRequest) returns (GetTalkSessionResponse) {}
+    rpc DeleteTalkSession (DeleteTalkSessionRequest) returns (DeleteTalkSessionResponse) {}
+}
+
+message Empty {}
+
+message CreateTalkSessionHistoryRequest{
+    string activeType = 1;
+    string usedHotKey = 2;
+    int64 accountId = 3;
+    int64 talkSessionId = 4;
+}
+
+message CreateTalkSessionHistoryResponse{
+    int64 id = 1;
+}
+
+message EndTalkSessionHistoryRequest{
+    int64 id = 1;
+}
+
+message EndTalkSessionHistoryResponse{
+
+}
+
+message GetTalkSessionHistoryByTalkSessionRequest{
+    int64 talkSessionId = 1;
+}
+
+message GetTalkSessionHistoryByTalkSessionResponse{
+    int64 id = 1;
+    string activeType = 2;
+    string startTime = 3;
+    string endTime = 4; 
+    string usedHotKey = 5;
+    string createdAt = 6;
+    string updatedAt = 7;
+    int64 accountId = 9;
+    int64 talkSessionId = 10;
+}
+
+message CreateNoteRequest{
+    int64 talkSessionId = 1;
+    string content = 2;
+    bool isGuest = 3;
+}
+
+message CreateNoteResponse{
+    int64 id = 1;
+    int64 talkSessionId = 2;
+    string content = 3;
+    bool isGuest = 4;
+    string createdAt = 5;
+    string updatedAt = 6;
+}
+
+message GetListNoteRequest{
+    int64 talkSessionId = 1;
+    int64 page = 2;
+    int64 perPage = 3;
+}
+
+message GetListNoteResponse{
+    repeated CreateNoteResponse notes = 1;
+}
+
+message UpdateNoteRequest{
+    int64 id = 1;
+    string content = 2;
+    bool isGuest  = 3;
+}
+
+message DeleteNoteRequest{
+    int64 id = 1;
+}
+
+message DeleteNoteResponse{
+    int64 rowsAffected = 1;
+    int64 talkSessionId = 2;
+}
+
+message ConversationContent{
+    bool private  = 1;
+    string content = 2;
+    string sendingTime = 3;
+}
+
+message SaveSpeechToTextRequest{
+    int64 talkSessionId = 1;
+    string conversation = 2;
+}
+
+message CreateTalkSessionRequest{
+    string storageLink = 1;
+    string usedHotKey = 2;
+    string sessionStatus = 3;
+    string customerRecord = 4;
+}
+
+message CreateTalkSessionResponse{
+    int64 id = 1;
+}
+
+message UpdateTalkSessionRequest{
+    int64 id = 1;
+    string storageLink = 2;
+    string usedHotKey = 4;
+    string sessionStatus = 5;
+    string customerRecord = 6;
+    string createdAt = 7;
+    string updatedAt = 8;
+}
+
+message UpdateTalkSessionResponse{
+    int64 id = 1;
+}
+
+message GetTalkSessionRequest{
+    int64 id = 1;
+}
+
+message GetTalkSessionResponse{
+    int64 id = 1;
+    string storageLink = 2;
+    string endTime = 3;
+    string usedHotKey = 4;
+    string sessionStatus = 5;
+    string customerRecord = 6;
+    string createdAt = 7;
+    string updatedAt = 8;
+}
+
+message DeleteTalkSessionRequest{
+    int64 id = 1;
+}
+
+message DeleteTalkSessionResponse{
+    int64 rowsAffected = 1;
+}
+
